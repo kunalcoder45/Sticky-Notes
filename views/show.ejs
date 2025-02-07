@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-yellow-100">
+    <div class="main w-full h-auto px-4">
+        <div class="breadcrumb">
+            <p class="text-blue-700 font-medium text-lg mt-3">
+                <a href="/" class="hover:underline">Home</a> > <span id="breadcrumbTitle"><%= filename %></span>
+            </p>
+        </div>
+
+        <div class="container">
+            <!-- Read-Only Title -->
+            <h1 id="title" class="text-2xl text-center font-bold mt-4 underline break-words px-2"><%= filename %></h1>
+
+            <!-- Read-Only Task Content -->
+            <p id="content" class="mt-6 px-4 font-medium break-words text-center sm:text-left"><%= filedata %></p>
+
+            <!-- Update Form (Hidden By Default) -->
+            <form action="/update/<%= filename %>" method="post" class="hidden mt-10 flex flex-col items-center" id="editForm">
+                <input type="text" name="newTitle" class="border p-2 w-full sm:w-3/4 md:w-2/3 lg:w-1/2 mx-auto block rounded-md" value="<%= filename %>">
+                <textarea name="description" class="border p-2 w-full sm:w-3/4 md:w-2/3 lg:w-1/2 h-32 mx-auto block rounded-md resize-none mt-3"><%= filedata %></textarea>
+                <button type="submit" class="bg-green-500 text-white p-4 mt-4 rounded-full flex items-center gap-2">
+                    <i class="fa-regular fa-floppy-disk"></i>
+                </button>
+            </form>
+
+            <div class="flex justify-center gap-4 mt-6" id="editIcon">
+                <button onclick="editTask()" class="bg-yellow-500 text-white p-4 rounded-full flex items-center gap-2">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function editTask() {
+            document.getElementById("title").classList.add("hidden");
+            document.getElementById("content").classList.add("hidden");
+            document.getElementById("editForm").classList.remove("hidden");
+            document.getElementById("editIcon").classList.add("hidden");
+        }
+    </script>
+</body>
+</html>
